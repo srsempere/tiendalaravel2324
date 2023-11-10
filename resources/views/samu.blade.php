@@ -1,3 +1,3 @@
 <x-guest-layout>
-    Hola
+    <h1>Hola, {{ $name }}</h1>
 </x-guest-layout>
