@@ -29,10 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/samu', function() {
-    return view('samu', ['name' => 'Baloo']);
-});
 
-Route::resource('categoria', CategoriaController::class);
+Route::resource('categorias', CategoriaController::class);
 
 require __DIR__.'/auth.php';

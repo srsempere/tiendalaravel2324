@@ -7,6 +7,9 @@
                     <th scope="col" class="px-6 py-3">
                         Nombre Categoría
                     </th>
+                    <th scope="col" class="px-6 py-3" colspan="2">
+                        Acción
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -14,6 +17,18 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                             {{ $categoria->nombre }}
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            <a href="">Editar</a>
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                            <form method="POST" action="{{ route('categorias.destroy', ['categoria' => $categoria]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <x-primary-button class="bg-red-700">
+                                    Borrar
+                                </x-primary-button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
