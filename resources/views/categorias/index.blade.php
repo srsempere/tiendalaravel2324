@@ -1,6 +1,7 @@
 <x-guest-layout>
 
-    <div cclass="overflow-x-auto">
+    <br>
+    <div class="overflow-x-auto">
         <table class="w-auto mx-auto text-sm text-center text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -34,6 +35,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="flex justify-center">
+        <form action="{{ route('categorias.create') }}" method="get">
+            <x-primary-button class="bg-green-700 m-4">Crear caregoría</x-primary-button>
+        </form>
     </div>
 
 </x-guest-layout>
