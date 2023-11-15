@@ -32,7 +32,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $categoria = new Categoria;
-        $categoria->nombre = $request->input('nombre');
+        $categoria->nombre = $request->input('nombre'); //TODO: Hacer validación.
         $categoria->save();
         return redirect()->route('categorias.index');
 
@@ -61,7 +61,7 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        $categoria->nombre = $request->input('nombre');
+        $categoria->nombre = $request->input('nombre'); //TODO: Hacer validaciión.
         $categoria->save();
         return redirect()->route('categorias.index');
     }
