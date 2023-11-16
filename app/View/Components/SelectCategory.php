@@ -11,10 +11,14 @@ class SelectCategory extends Component
     /**
      * Create a new component instance.
      */
+    public $name;
     public $categorias;
-    public function __construct($categorias)
+    public $value;
+    public function __construct($name, $categorias, $value)
     {
+        $this->name = $name;
         $this->categorias = $categorias;
+        $this->value = $value;
     }
 
     /**

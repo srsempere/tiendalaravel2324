@@ -19,7 +19,7 @@
 
             <!-- Categoria -->
             <div>
-                <x-select-category :categorias="$categorias" name="categoria_id" :value="old('categoria_id')"/>
+                <x-select-category name="categoria_id" :categorias="$categorias" :value="old('categoria_id')" />
             </div>
             <div class="flex items-center justify-end mt-">
                 <a href="{{ route('categorias.index') }}">
@@ -28,7 +28,7 @@
                     </x-secondary-button>
                 </a>
                 <x-primary-button class="ms-4 bg-green-700">
-                   Crear artículo
+                    Crear artículo
                 </x-primary-button>
             </div>
         </form>
