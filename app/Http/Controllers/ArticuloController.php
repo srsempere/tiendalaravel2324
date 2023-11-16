@@ -51,7 +51,9 @@ class ArticuloController extends Controller
      */
     public function edit(Articulo $articulo)
     {
-        //
+        return view('articulos.edit', [
+           'articulo'  => $articulo,
+        ]);
     }
 
     /**
@@ -59,7 +61,9 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, Articulo $articulo)
     {
-        //
+        $articulo->denominacion = $request->input('denominacion');
+        $articulo->save();
+        return redirect()->route('articulos.index');
     }
 
     /**
