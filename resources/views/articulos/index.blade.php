@@ -54,5 +54,9 @@
             </tbody>
         </table>
     </div>
-
+    <div>
+        <form action="{{ route('articulos.create') }}" method="get">
+            <x-primary-button class="bg-green-700 m-4">Crear nuevo artículo</x-primary-button>
+        </form>
+    </div>
 </x-guest-layout>

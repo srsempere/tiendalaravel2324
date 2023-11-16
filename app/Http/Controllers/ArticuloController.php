@@ -27,7 +27,10 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        return view('articulos.create', [
+            'categorias' => $categorias,
+        ]);
     }
 
     /**
@@ -35,7 +38,12 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $articulo = new Articulo();
+        $articulo->denominacion = $request->input('denominacion');
+        $articulo->precio = $request->input('precio');
+        $articulo->categoria_id = $request->input('categoria_id');
+        $articulo->save();
+        return redirect()->route('articulos.index');
     }
 
     /**
