@@ -27,7 +27,7 @@
                             </a>
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                            <form method="POST" action="{{ route('categorias.destroy', ['categoria' => $categoria]) }}">
+                            <form method="post" action="{{ route('categorias.destroy', ['categoria' => $categoria]) }}">
                                 @csrf
                                 @method('DELETE')
                                 <x-primary-button class="bg-red-700">
