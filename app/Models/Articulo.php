@@ -10,6 +10,8 @@ class Articulo extends Model
 {
     use HasFactory;
 
+    protected $fillable =['denominacion', 'precio', 'categoria_id'];
+
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class);

@@ -8,7 +8,7 @@
             <x-text-input id="denominacion" class="block mt-1 w-full" type="text" name="denominacion" :value="old('denominacion', $articulo->denominacion)" required autofocus autocomplete="denominacion" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-
+        //TODO: Modificar el editar para que edite el articulo completo
         <div class="flex items-center justify-end mt-">
             <a href="{{ route('articulos.index') }}">
                 <x-secondary-button class="m-4">

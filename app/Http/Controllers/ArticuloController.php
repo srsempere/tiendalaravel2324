@@ -38,10 +38,8 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        $articulo = new Articulo();
-        $articulo->denominacion = $request->input('denominacion');
-        $articulo->precio = $request->input('precio');
-        $articulo->categoria_id = $request->input('categoria_id');
+        //TODO: Añadir validación
+        $articulo = new Articulo($request->input()); //Otra forma es accediendo al método estático Articulo::create($request->input()); Se ahorra el save()
         $articulo->save();
         return redirect()->route('articulos.index');
     }
