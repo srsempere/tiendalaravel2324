@@ -27,12 +27,8 @@
                             {{ number_format($articulo->precio, 2, '.', ',') . '€' }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            @foreach ($categorias as $categoria)
-                                @if ($articulo->categoria_id == $categoria->id)
-                                    {{ $categoria->nombre }}
-                                @endif
-                            @endforeach
-                        </td>
+                                {{ $articulo->categoria->nombre }}
+                                                    </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             <a href="{{ route('articulos.edit', ['articulo' => $articulo]) }}">
                                 <x-primary-button class="bg-blue-500">
