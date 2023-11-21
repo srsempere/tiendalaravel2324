@@ -59,6 +59,7 @@ class ArticuloController extends Controller
     {
         return view('articulos.edit', [
            'articulo'  => $articulo,
+           'categorias' => Categoria::all(),
         ]);
     }
 

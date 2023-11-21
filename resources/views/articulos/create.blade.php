@@ -19,7 +19,11 @@
 
             <!-- Categoria -->
             <div>
-                <x-select-category name="categoria_id" :categorias="$categorias" :value="old('categoria_id')" />
+                <select id="categoria_id" name="categoria_id" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="flex items-center justify-end mt-">
                 <a href="{{ route('categorias.index') }}">
