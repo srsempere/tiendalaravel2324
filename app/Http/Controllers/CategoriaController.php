@@ -31,8 +31,9 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria;
-        $categoria->nombre = $request->input('nombre'); //TODO: Hacer validación.
+
+        $validated = $this->valida($request);
+        $categoria = new Categoria($validated);
         $categoria->save();
         return redirect()->route('categorias.index');
 
@@ -61,8 +62,8 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        $categoria->nombre = $request->input('nombre'); //TODO: Hacer validaciión.
-        $categoria->save();
+        $validated = $this->validar($request);
+        $categoria->update($validated);
         return redirect()->route('categorias.index');
     }
 
@@ -73,5 +74,12 @@ class CategoriaController extends Controller
     {
         $categoria->delete();
         return redirect()->route('categorias.index');
+    }
+
+    private function valida(REQUEST $request)
+    {
+        return $request->validate([
+            'nombre' => 'required|string|max:50'
+        ]);
     }
 }

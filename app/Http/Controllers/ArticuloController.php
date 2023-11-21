@@ -68,6 +68,7 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, Articulo $articulo)
     {
+        //TODO: Realizar validación
         $articulo->denominacion = $request->input('denominacion');
         $articulo->save();
         return redirect()->route('articulos.index');
@@ -80,5 +81,14 @@ class ArticuloController extends Controller
     {
         $articulo->delete();
         return redirect()->route('articulos.index');
+    }
+
+    private function validar(REQUEST $request)
+    {
+        return $request->validate([
+            'denominacion' => 'required|string|max:255',
+            'precio' => 'required|numeric|decimal:2|between:-9999.99,9999.99',
+            'categoria_id' => 'required|integer|exists:categorias,id'
+        ]);
     }
 }
