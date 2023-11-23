@@ -1,5 +1,4 @@
-<x-guest-layout>
-
+<x-app-layout>
     <br>
     <div class="overflow-x-auto">
         <table class="w-auto mx-auto text-sm text-center text-gray-500 dark:text-gray-400">
@@ -46,4 +45,4 @@
         </form>
     </div>
 
-</x-guest-layout>
+</x-app-layout>

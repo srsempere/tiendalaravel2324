@@ -62,7 +62,7 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        $validated = $this->validar($request);
+        $validated = $this->valida($request);
         $categoria->update($validated);
         return redirect()->route('categorias.index');
     }

@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <div class="relative overflow-x-auto w-full h-full">
         <table class="w-full h-full text-sm text-center text-gray-500 dark:text-gray-400">
             <thead class="bg-gray-50">
@@ -55,4 +55,4 @@
             <x-primary-button class="bg-green-700 m-4">Crear nuevo artículo</x-primary-button>
         </form>
     </div>
-</x-guest-layout>
+</x-app-layout>
