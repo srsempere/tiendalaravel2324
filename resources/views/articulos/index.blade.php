@@ -9,6 +9,9 @@
                     <th scope="col" class="px-7 py-3">
                         Precio
                     </th>
+                    <th scope="col" class="px-7 py-3">
+                        Iva
+                    </th>
                     <th scope="col" class="px-7 py-3]">
                         Categoría
                     </th>
@@ -25,6 +28,9 @@
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             {{ number_format($articulo->precio, 2, '.', ',') . '€' }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                            {{ $articulo->iva_id }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                                 {{ $articulo->categoria->nombre }}

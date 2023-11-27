@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Categoria;
+use App\Models\Iva;
 use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
@@ -13,12 +14,10 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::all();
-        $categorias = Categoria::all();
 
         return view('articulos.index', [
-            'articulos' => $articulos,
-            'categorias' => $categorias,
+            'articulos' => Articulo::all(),
+            'categorias' => Categoria::all(),
         ]);
     }
 
@@ -27,9 +26,9 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
         return view('articulos.create', [
-            'categorias' => $categorias,
+            'categorias' => Categoria::all(),
+            'ivas' => Iva::all(),
         ]);
     }
 
@@ -38,9 +37,8 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: Añadir validación
-        $articulo = new Articulo($request->input()); //Otra forma es accediendo al método estático Articulo::create($request->input()); Se ahorra el save()
-        $articulo->save();
+        $validated = $this->validar($request);
+        Articulo::create($validated);
         return redirect()->route('articulos.index');
     }
 
@@ -88,7 +86,8 @@ class ArticuloController extends Controller
         return $request->validate([
             'denominacion' => 'required|string|max:255',
             'precio' => 'required|numeric|decimal:2|between:-9999.99,9999.99',
-            'categoria_id' => 'required|integer|exists:categorias,id'
+            'categoria_id' => 'required|integer|exists:categorias,id',
+            'iva_id' => 'required|integer|exists:ivas,id'
         ]);
     }
 }

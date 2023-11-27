@@ -17,6 +17,15 @@
                 <x-input-error :messages="$errors->get('precio')" class="mt-2" />
             </div>
 
+             <!-- IVa -->
+             <div>
+                <select id="iva_id" name="iva_id" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                    @foreach ($ivas as $iva)
+                        <option value="{{ $iva->tipo }}">{{ $iva->por . '% - ' . $iva->tipo }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <!-- Categoria -->
             <div>
                 <select id="categoria_id" name="categoria_id" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
@@ -26,7 +35,7 @@
                 </select>
             </div>
             <div class="flex items-center justify-end mt-">
-                <a href="{{ route('categorias.index') }}">
+                <a href="{{ route('articulos.index') }}">
                     <x-secondary-button class="m-4">
                         Volver
                     </x-secondary-button>
