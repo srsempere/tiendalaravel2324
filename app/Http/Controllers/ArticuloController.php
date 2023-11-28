@@ -16,8 +16,7 @@ class ArticuloController extends Controller
     {
 
         return view('articulos.index', [
-            'articulos' => Articulo::all(),
-            'categorias' => Categoria::all(),
+            'articulos' => Articulo::with('categoria', 'iva')->get(),
         ]);
     }
 

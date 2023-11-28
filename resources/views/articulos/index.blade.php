@@ -30,7 +30,7 @@
                             {{ number_format($articulo->precio, 2, '.', ',') . '€' }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            {{ $articulo->iva_id }}
+                            {{ " {$articulo->iva->por}% ({$articulo->iva->tipo})" }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                                 {{ $articulo->categoria->nombre }}
