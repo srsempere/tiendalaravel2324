@@ -21,7 +21,7 @@
              <div>
                 <select id="iva_id" name="iva_id" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
                     @foreach ($ivas as $iva)
-                        <option value="{{ $iva->tipo }}">{{ $iva->por . '% - ' . $iva->tipo }}</option>
+                        <option value="{{ $iva->id }}" {{ old('iva_id') == $iva->id ? 'selected' : '' }}>{{ $iva->por . '% - ' . $iva->tipo }}</option>
                     @endforeach
                 </select>
             </div>
@@ -30,7 +30,7 @@
             <div>
                 <select id="categoria_id" name="categoria_id" required class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
                     @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                        <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>{{ $categoria->nombre }}</option>
                     @endforeach
                 </select>
             </div>
