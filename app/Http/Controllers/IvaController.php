@@ -22,7 +22,7 @@ class IvaController extends Controller
      */
     public function create()
     {
-        //
+        return view('ivas.create');
     }
 
     /**
@@ -30,7 +30,12 @@ class IvaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'tipo' => 'required|string|max:20',
+            'por' => 'required|numeric|between:0,100'
+        ]);
+        Iva::create($validated);
+        return redirect()->route('ivas.index');
     }
 
     /**
@@ -62,6 +67,7 @@ class IvaController extends Controller
      */
     public function destroy(Iva $iva)
     {
-        //
+        $iva->delete();
+        return redirect()->route('ivas.index');
     }
 }

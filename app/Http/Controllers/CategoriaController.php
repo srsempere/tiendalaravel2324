@@ -79,7 +79,8 @@ class CategoriaController extends Controller
     private function valida(REQUEST $request)
     {
         return $request->validate([
-            'nombre' => 'required|string|max:50'
+            'tipo' => 'required|string|max:50',
+            'por' => 'required|decimal'
         ]);
     }
 }
