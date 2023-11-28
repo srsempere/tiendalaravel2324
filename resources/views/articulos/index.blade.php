@@ -32,11 +32,11 @@
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             {{ number_format($articulo->precio, 2, '.', ',') . '€' }}
                         </td>
-                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            {{ " {$articulo->iva->por}% ({$articulo->iva->tipo})" }}
+                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500" title="{{ $articulo->iva->tipo }}">
+                            {{ " {$articulo->iva->por}%" }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            {{ $articulo->precio_ii . ' %'}}
+                            {{ $articulo->precio_ii . ' €'}}
                         </td>
                         <td class
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">

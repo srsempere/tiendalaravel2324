@@ -57,6 +57,7 @@ class ArticuloController extends Controller
         return view('articulos.edit', [
            'articulo'  => $articulo,
            'categorias' => Categoria::all(),
+           'ivas' => Iva::all(),
         ]);
     }
 
@@ -65,9 +66,8 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, Articulo $articulo)
     {
-        //TODO: Realizar validación
-        $articulo->denominacion = $request->input('denominacion');
-        $articulo->save();
+        $validated = $this->validar($request);
+        $articulo->update($validated);
         return redirect()->route('articulos.index');
     }
 
