@@ -21,4 +21,9 @@ class Articulo extends Model
     {
         return $this->belongsTo(Iva::class);
     }
+
+    public function getPrecioIiAttribute()
+    {
+        return $this->precio * (1 + $this->iva->por / 100);
+    }
 }

@@ -12,6 +12,9 @@
                     <th scope="col" class="px-7 py-3">
                         Iva
                     </th>
+                    <th scope="col" class="px-7 py-3">
+                        Precio I.I.
+                    </th>
                     <th scope="col" class="px-7 py-3]">
                         Categoría
                     </th>
@@ -32,6 +35,10 @@
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             {{ " {$articulo->iva->por}% ({$articulo->iva->tipo})" }}
                         </td>
+                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                            {{ $articulo->precio_ii . ' %'}}
+                        </td>
+                        <td class
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                                 {{ $articulo->categoria->nombre }}
                                                     </td>
