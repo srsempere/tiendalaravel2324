@@ -33,8 +33,7 @@ class CategoriaController extends Controller
     {
 
         $validated = $this->valida($request);
-        $categoria = new Categoria($validated);
-        $categoria->save();
+        Categoria::create($validated);
         return redirect()->route('categorias.index');
 
     }
@@ -79,8 +78,7 @@ class CategoriaController extends Controller
     private function valida(REQUEST $request)
     {
         return $request->validate([
-            'tipo' => 'required|string|max:50',
-            'por' => 'required|decimal'
+            'nombre' => 'required|string|max:40',
         ]);
     }
 }
