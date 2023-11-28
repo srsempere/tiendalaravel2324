@@ -22,7 +22,7 @@
                             {{ $iva->tipo }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                            {{ $iva->por }}
+                            {{ "{$iva->por}%" }}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                             <a href="{{ route('ivas.edit', ['iva' => $iva]) }}">
