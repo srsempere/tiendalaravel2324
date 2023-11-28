@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Articulo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('principal', [
+        'articulos' => Articulo::with('iva', 'categoria')->get(),
+    ]);
+})->name('principal');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
