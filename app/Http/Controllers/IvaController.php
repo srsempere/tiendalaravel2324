@@ -12,7 +12,9 @@ class IvaController extends Controller
      */
     public function index()
     {
-        return view('ivas.index');
+        return view('ivas.index', [
+            'ivas' => Iva::all(),
+        ]);
     }
 
     /**
