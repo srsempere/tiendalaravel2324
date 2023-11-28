@@ -21,6 +21,11 @@
                         {{ __('Categorías') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('ivas.index')" :active="request()->routeIs('ivas.index')">
+                        {{ __('Ivas') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             @auth
