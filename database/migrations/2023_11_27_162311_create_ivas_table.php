@@ -14,11 +14,15 @@ return new class extends Migration
     {
         Schema::create('ivas', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['normal', 'reducido', 'super_reducido']);
-            $table->unsignedInteger('por');
+            $table->string('tipo');
+            $table->decimal('por', 4, 2);
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE ivas ADD CONSTRAINT chk_por_range CHECK (por >= 0 AND por <= 100)');
+        DB::table('ivas')->insert([
+            ['tipo' => 'General', 'por' => 21.0],
+            ['tipo' => 'Reducido', 'por' => 10.0],
+            ['tipo' => 'Súperreducido', 'por' => 4.00],
+        ]);
     }
 
     /**
