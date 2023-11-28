@@ -50,4 +50,5 @@
             <x-primary-button class="bg-green-700 m-4">Crear IVA</x-primary-button>
         </form>
     </div>
+    {{ $articulos->links() }}
 </x-app-layout>
