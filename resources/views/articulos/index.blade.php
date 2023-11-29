@@ -4,10 +4,15 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th scope="col" class="px-7 py-3">
-                        Nombre Artículo
+                        <a href="{{ route('articulos.index', ['order' => 'denominacion', 'direccion' => order_direccion($order == 'denominacion', $direccion)]) }}" class="text-blue-500 hover:text-blue-700 font-semibold cursor-pointer">
+                            Nombre Artículo {{ flechas($order == 'denominacion', $direccion) }}
+
+                        </a>
                     </th>
                     <th scope="col" class="px-7 py-3">
-                        Precio
+                        <a href="{{ route('articulos.index', ['order' => 'precio', 'direccion' => order_direccion($order == 'precio', $direccion)]) }}" class="text-blue-500 hover:text-blue-700 font-semibold cursor-pointer">
+                            Precio {{ flechas($order == 'precio', $direccion) }}
+                        </a>
                     </th>
                     <th scope="col" class="px-7 py-3">
                         Iva
