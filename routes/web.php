@@ -24,6 +24,12 @@ Route::get('/', function () {
     ]);
 })->name('principal');
 
+Route::get('/principal', function(){
+    return view('principal', [
+        'articulos' => Articulo::with('iva', 'categoria')->get(),
+    ]);
+})->name('principal');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,10 +41,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('categorias', CategoriaController::class);
-
 Route::resource('articulos', ArticuloController::class);
 
-Route::resource('ivas', IvaController::class);
+Route::resource('categorias', CategoriaController::class)->middleware('auth');
+
+Route::resource('ivas', IvaController::class)->middleware('auth');
 
 require __DIR__ . '/auth.php';
