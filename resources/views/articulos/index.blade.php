@@ -27,10 +27,10 @@
                 @foreach ($articulos as $articulo)
                     <tr>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            {{ $articulo->denominacion }}
+                            {{ truncar($articulo->denominacion) }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
-                            {{ number_format($articulo->precio, 2, '.', ',') . '€' }}
+                            {{ dinero($articulo->precio) }}
                         </td>
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500" title="{{ $articulo->iva->tipo }}">
                             {{ " {$articulo->iva->por}%" }}
