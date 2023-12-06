@@ -23,9 +23,8 @@
                         {{ $articulo->denominacion }}</h1>
                     <p>Precio: {{ dinero($articulo->precio) }}</p>
                     <p>Categoria: {{ $articulo->categoria->nombre }}</p>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur,
-                        adipisicing elit. Accusantium aspernatur rem fuga similique et porro amet voluptatem asperiores,
-                        molestiae veritatis voluptatum ipsum, ipsam, magni possimus repellendus in quam quod suscipit.
+                    <p class="font-normal text-gray-700 dark:text-gray-400">
+                        {{ truncar($articulo->descripcion, 70) }}
                     </p>
                     <a href="{{ route('carrito.insertar', $articulo) }}"
                         class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-700 hover:bg-blue-800">

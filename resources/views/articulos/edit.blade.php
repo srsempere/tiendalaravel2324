@@ -8,6 +8,12 @@
             <x-text-input id="denominacion" class="block mt-1 w-full" type="text" name="denominacion" :value="old('denominacion', $articulo->denominacion)" required autofocus autocomplete="denominacion" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
+          <!-- Descripción -->
+          <div>
+            <x-input-label for="descripcion" :value="'Descripción del artículo'" />
+            <x-text-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion" :value="old('descripcion', $articulo->descripcion)" required autofocus autocomplete="descripcion" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        </div>
         <!-- Precio -->
         <div>
             <x-input-label for="precio" :value="'Precio del artículo'" class="mt-2"/>
