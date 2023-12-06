@@ -29,8 +29,11 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $denominacion = session('denominacion');
+                @endphp
                 @foreach ($articulos as $articulo)
-                    <tr>
+                    <tr class="{{ session()->has('exito') && isset($denominacion) && $denominacion == $articulo->denominacion ? 'bg-green-100' : '' }}">
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             {{ truncar($articulo->denominacion) }}
                         </td>
@@ -43,7 +46,6 @@
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                             {{ $articulo->precio_ii . ' €'}}
                         </td>
-                        <td class
                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                                 {{ $articulo->categoria->nombre }}
                                                     </td>

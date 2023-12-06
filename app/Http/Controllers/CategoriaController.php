@@ -33,6 +33,9 @@ class CategoriaController extends Controller
     {
 
         $validated = $this->valida($request);
+        if ($validated) {
+            session()->flash('exito','La categoría se ha creado correctamente');
+        }
         Categoria::create($validated);
         return redirect()->route('categorias.index');
     }

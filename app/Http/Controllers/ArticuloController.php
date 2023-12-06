@@ -45,8 +45,12 @@ class ArticuloController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validar($request);
+        $denominacion = $request->input('denominacion'); //Esto lo hago para arrastrar el nombre y colorearlo luego en verde al insertar el artículo nuevo.
         Articulo::create($validated);
-        return redirect()->route('articulos.index');
+        if ($validated) {
+            session()->flash('exito', 'El articulo se ha creado correctamente');
+        }
+        return redirect()->route('articulos.index',)->with('denominacion', $denominacion);
     }
 
     /**
@@ -85,6 +89,7 @@ class ArticuloController extends Controller
     public function destroy(Articulo $articulo)
     {
         $articulo->delete();
+        session()->flash('exito', 'El artículo se ha borrado correctamente');
         return redirect()->route('articulos.index');
     }
 
