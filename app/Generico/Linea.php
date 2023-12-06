@@ -25,7 +25,7 @@ class Linea
         return $this->cantidad;
     }
 
-    public function increCantidad()
+    public function incrCantidad()
     {
         $this->cantidad++;
     }
