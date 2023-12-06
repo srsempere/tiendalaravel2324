@@ -79,13 +79,11 @@ class ArticuloController extends Controller
     public function update(Request $request, Articulo $articulo)
     {
         $validated = $this->validar($request);
-        $articulo->update($validated);
         if ($validated) {
+            $articulo->update($validated);
             session()->flash('exito', 'El artículo se ha actualizado correctamente');
-        } else {
-            // Aquí quiero que se muestre el campo que falla en la validación
+            return redirect()->route('articulos.index')->with('denominacion', $request->input('denominacion'));
         }
-        return redirect()->route('articulos.index')->with('denominacion', $request->input('denominacion'));
     }
 
     /**
@@ -105,7 +103,7 @@ class ArticuloController extends Controller
             'precio' => 'required|numeric|between:-9999.99,9999.99',
             'categoria_id' => 'required|integer|exists:categorias,id',
             'iva_id' => 'required|integer|exists:ivas,id',
-            'descripcion'=> 'string|max:255'
+            'descripcion' => 'nullable|string|max:255'
         ]);
     }
 
