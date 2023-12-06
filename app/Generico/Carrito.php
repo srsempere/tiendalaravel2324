@@ -8,10 +8,12 @@ use ValueError;
 class Carrito
 {
     private array $lineas;
+    private int $total_carrito;
 
     public function __construct()
     {
         $this->lineas = [];
+        $this->total_carrito = 0;
     }
 
     public function insertar($id)
@@ -57,5 +59,13 @@ class Carrito
         }
 
         return session('carrito');
+    }
+
+    private function sumCarrito()
+    {
+        $this->total_carrito = 0;
+        foreach ($this->lineas as $linea) {
+            $this->total_carrito += $linea->getTotal();
+        }
     }
 }

@@ -25,6 +25,11 @@ class Linea
         return $this->cantidad;
     }
 
+    public function getPrecio()
+    {
+        return $this->articulo->precio;
+    }
+
     public function incrCantidad()
     {
         $this->cantidad++;
@@ -33,5 +38,10 @@ class Linea
     public function decrCantidad()
     {
         $this->cantidad--;
+    }
+
+    public function getTotal()
+    {
+        return $this->getPrecio() * $this->getCantidad();
     }
 }
