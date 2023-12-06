@@ -102,7 +102,8 @@ class ArticuloController extends Controller
             'denominacion' => 'required|string|max:255',
             'precio' => 'required|numeric|decimal:2|between:-9999.99,9999.99',
             'categoria_id' => 'required|integer|exists:categorias,id',
-            'iva_id' => 'required|integer|exists:ivas,id'
+            'iva_id' => 'required|integer|exists:ivas,id',
+            'descripcion'=> 'string|max:255'
         ]);
     }
 
