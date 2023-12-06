@@ -8,7 +8,7 @@ use ValueError;
 class Carrito
 {
     private array $lineas;
-    private int $total_carrito;
+    private float $total_carrito;
 
     public function __construct()
     {
@@ -24,8 +24,10 @@ class Carrito
 
         if (isset($this->lineas[$id])) {
             $this->lineas[$id]->incrCantidad();
+            $this->recalcularTotal();
         } else {
             $this->lineas[$id] = new Linea($articulo);
+            $this->recalcularTotal();
         }
     }
 
@@ -36,6 +38,7 @@ class Carrito
         }
 
         $this->lineas[$id]->decCantidad();
+        $this->recalcularTotal();
         if ($this->lineas[$id]->getCantidad() == 0) {
             unset($this->lineas[$id]);
         }
@@ -61,11 +64,16 @@ class Carrito
         return session('carrito');
     }
 
-    private function sumCarrito()
+    public function recalcularTotal()
     {
         $this->total_carrito = 0;
         foreach ($this->lineas as $linea) {
-            $this->total_carrito += $linea->getTotal();
+            $this->total_carrito += $linea->getTotalArticulo();
         }
+    }
+
+    public function getTotalCarrito()
+    {
+        return $this->total_carrito;
     }
 }
