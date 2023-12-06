@@ -17,9 +17,9 @@ class ArticuloController extends Controller
         $order = $request->query('order', 'denominacion');
         $direccion = $request->query('direccion', 'asc');
         $articulos = Articulo::with('categoria', 'iva')
-        ->orderBy($order, $direccion)
-        ->orderBy('denominacion')
-        ->paginate(10);
+            ->orderBy($order, $direccion)
+            ->orderBy('denominacion')
+            ->paginate(10);
         return view('articulos.index', [
             'articulos' => $articulos,
             'direccion' => $direccion,
@@ -62,9 +62,9 @@ class ArticuloController extends Controller
     public function edit(Articulo $articulo)
     {
         return view('articulos.edit', [
-           'articulo'  => $articulo,
-           'categorias' => Categoria::all(),
-           'ivas' => Iva::all(),
+            'articulo'  => $articulo,
+            'categorias' => Categoria::all(),
+            'ivas' => Iva::all(),
         ]);
     }
 
@@ -95,5 +95,19 @@ class ArticuloController extends Controller
             'categoria_id' => 'required|integer|exists:categorias,id',
             'iva_id' => 'required|integer|exists:ivas,id'
         ]);
+    }
+
+    public function buscar(Request $request)
+    {
+        $categoria = $request->input('categoria'); //TODO: Realiza validación
+
+        // Búsqueda en la base de datos
+
+        // Búsqueda en la base de datos
+        $articulos = Articulo::whereHas('categoria', function ($query) use ($categoria) {
+            $query->where('nombre', 'like', '%' . $categoria . '%');
+        })->get();
+
+        return view('principal', ['articulos' => $articulos]);
     }
 }

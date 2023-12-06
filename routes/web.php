@@ -47,4 +47,6 @@ Route::resource('categorias', CategoriaController::class)->middleware('auth');
 
 Route::resource('ivas', IvaController::class)->middleware('auth');
 
+Route::get('buscar-articulos', [ArticuloController::class, 'buscar'])->name('buscar_articulos');
+
 require __DIR__ . '/auth.php';

@@ -1,5 +1,16 @@
 <x-app-layout>
     <div class="flex">
+        {{-- Buscar por categoría --}}
+        <form action="{{ route('buscar_articulos') }}" method="get">
+            <div>
+                <x-input-label for="categoria" :value="__('Categoría')" class="ms-1"/>
+                <x-text-input id="categoria" class="block mt-1 w-full ms-1" type="text" name="categoria" :value="old('categoria')"/>
+                <x-input-error :messages="$errors->get('categoria')" class="mt-2" />
+            </div>
+            <x-primary-button class="ms-1 mt-2">
+                {{ __('Buscar') }}
+            </x-primary-button>
+        </form>
         <div class="p-2 flex-1 grid grid-cols-3 gap-4 justify-center justify-items-center">
             @foreach ($articulos as $articulo)
                 <a href="#"
