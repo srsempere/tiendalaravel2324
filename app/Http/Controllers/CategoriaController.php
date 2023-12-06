@@ -13,7 +13,7 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('categorias.index',[
+        return view('categorias.index', [
             'categorias' => $categorias,
         ]);
     }
@@ -35,7 +35,6 @@ class CategoriaController extends Controller
         $validated = $this->valida($request);
         Categoria::create($validated);
         return redirect()->route('categorias.index');
-
     }
 
     /**
@@ -71,7 +70,11 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
+        if ($categoria->articulos->isEmpty()) {
+            $categoria->delete();
+        } else {
+            session()->flash('error', 'La categoría tiene artículos');
+        }
         return redirect()->route('categorias.index');
     }
 
