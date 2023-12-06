@@ -4,7 +4,7 @@
         <form action="{{ route('buscar_articulos') }}" method="get">
             <div>
                 <x-input-label for="categoria" :value="__('Categoría')" class="ms-1"/>
-                <x-text-input id="categoria" class="block mt-1 w-full ms-1" type="text" name="categoria" :value="old('categoria')"/>
+                <x-text-input id="categoria" class="block mt-1 w-full ms-1" type="text" name="categoria" :value="request('categoria')"/>
                 <x-input-error :messages="$errors->get('categoria')" class="mt-2" />
             </div>
             <x-primary-button class="ms-1 mt-2">
