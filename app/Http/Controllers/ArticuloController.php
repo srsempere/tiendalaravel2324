@@ -80,7 +80,10 @@ class ArticuloController extends Controller
     {
         $validated = $this->validar($request);
         $articulo->update($validated);
-        return redirect()->route('articulos.index');
+        if ($validated) {
+            session()->flash('exito', 'El artículo se ha actualizado correctamente');
+        }
+        return redirect()->route('articulos.index')->with('denominacion', $request->input('denominacion'));
     }
 
     /**

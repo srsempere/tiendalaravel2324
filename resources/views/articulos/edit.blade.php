@@ -11,7 +11,7 @@
         <!-- Precio -->
         <div>
             <x-input-label for="precio" :value="'Precio del artículo'" class="mt-2"/>
-            <x-text-input id="precio" class="block mt-1 w-full" type="text" name="precio" :value="old('precio', $articulo->precio)" required autofocus autocomplete="denominacion" />
+            <x-text-input id="precio" class="block mt-1 w-full" type="text" name="precio" :value="old('precio', $articulo->precio)" required autofocus autocomplete="precio" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
          <!-- IVA -->
@@ -21,7 +21,7 @@
                <select id="iva_id" name="iva_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" required>
                 @foreach ($ivas as $iva)
                     <option value="{{ $iva->id }}"
-                        {{ old('iva_id', $articulo->iva_id) == $articulo->iva_id ? 'selected' : '' }}
+                        {{ old('iva_id', $articulo->iva_id) == $iva->id ? 'selected' : '' }}
                         >{{ $iva->tipo }}</option>
                 @endforeach
                </select>
@@ -35,7 +35,7 @@
                <select id="categoria_id" name="categoria_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" required>
                 @foreach ($categorias as $categoria)
                     <option value="{{ $categoria->id }}"
-                        {{ old('categoria_id', $articulo->categoria_id) == $articulo->categoria_id ? 'selected' : '' }}
+                        {{ old('categoria_id', $articulo->categoria_id) == $categoria->id ? 'selected' : '' }}
                         >{{ $categoria->nombre }}</option>
                 @endforeach
                </select>
