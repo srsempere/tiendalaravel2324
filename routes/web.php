@@ -1,6 +1,8 @@
 <?php
 
+use App\Generico\Carrito;
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ProfileController;
@@ -21,12 +23,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('principal', [
         'articulos' => Articulo::with('iva', 'categoria')->get(),
+        'carrito' => Carrito::carrito(),
     ]);
 })->name('principal');
 
 Route::get('/principal', function(){
     return view('principal', [
         'articulos' => Articulo::with('iva', 'categoria')->get(),
+        'carrito' => Carrito::carrito(),
     ]);
 })->name('principal');
 
@@ -48,5 +52,18 @@ Route::resource('categorias', CategoriaController::class)->middleware('auth');
 Route::resource('ivas', IvaController::class)->middleware('auth');
 
 Route::get('buscar-articulos', [ArticuloController::class, 'buscar'])->name('buscar_articulos');
+
+Route::get('/carrito/insertar/{id}', [CarritoController::class, 'insertar'])->name('carrito.insertar')->whereNumber('id');
+
+Route::get('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar')->whereNumber('id');
+
+Route::get('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
+
+Route::get('/comprar', function () {
+    return view('comprar', [
+        'carrito' => Carrito::carrito(),
+    ]);
+})->middleware('auth')->name('comprar');
+
 
 require __DIR__ . '/auth.php';

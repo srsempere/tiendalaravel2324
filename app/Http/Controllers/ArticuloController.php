@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Generico\Carrito;
 use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Iva;
@@ -108,6 +109,9 @@ class ArticuloController extends Controller
             $query->where('nombre', 'like', '%' . $categoria . '%');
         })->get();
 
-        return view('principal', ['articulos' => $articulos]);
+        return view('principal', [
+            'articulos' => $articulos,
+            'carrito' => Carrito::carrito(),
+        ]);
     }
 }
