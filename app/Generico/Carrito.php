@@ -37,7 +37,7 @@ class Carrito
             throw new ValueError('Artículo inexistente en el carrito');
         }
 
-        $this->lineas[$id]->decCantidad();
+        $this->lineas[$id]->decrCantidad();
         $this->recalcularTotal();
         if ($this->lineas[$id]->getCantidad() == 0) {
             unset($this->lineas[$id]);
