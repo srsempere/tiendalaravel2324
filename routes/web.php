@@ -70,10 +70,7 @@ Route::get('/comprar', function () {
 
 Route::post('wishlist/add/{articulo}', [WishListController::class, 'addToWishList'])->name('wishlist.add')->middleware('auth');
 
-Route::get('/listaDeseos', function() {
-    $listaDeseos = Auth::user()->listaDeseos()->get();
-    return view('listaDeseos', ['listaDeseos' => $listaDeseos]);
-})->name('listaDeseos');
+Route::get('/listaDeseos',[WishListController::class, 'show'])->name('listaDeseos')->middleware('auth');
 
 
 require __DIR__ . '/auth.php';
