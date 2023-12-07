@@ -4,6 +4,7 @@ use App\Generico\Carrito;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -62,16 +63,17 @@ Route::get('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->na
 
 Route::get('/carrito/vaciar', [CarritoController::class, 'vaciar'])->name('carrito.vaciar');
 
-Route::get('/comprar', function () {
-    return view('comprar', [
-        'carrito' => Carrito::carrito(),
-    ]);
-})->middleware('auth')->name('comprar');
 
 Route::post('wishlist/add/{articulo}', [WishListController::class, 'addToWishList'])->name('wishlist.add')->middleware('auth');
 Route::post('wishlist/remove/{articulo}', [WishListController::class, 'removeWish'])->name('wishlist.remove')->middleware('auth');
 
 Route::get('/listaDeseos',[WishListController::class, 'show'])->name('listaDeseos')->middleware('auth');
 
+Route::resource('facturas', FacturaController::class)->middleware('auth');
 
+Route::get('/comprar', [FacturaController::class, 'create'])->middleware('auth')->name('comprar');
+
+Route::post('/realizar_compra', [FacturaController::class, 'realizarCompra'])->middleware('auth')->name('realizar_compra');
+
+// Route::post('/realizar_compra', [FacturaController::class, ])
 require __DIR__ . '/auth.php';

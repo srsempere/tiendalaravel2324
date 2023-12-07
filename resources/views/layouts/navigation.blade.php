@@ -53,6 +53,10 @@
                             {{ __('Lista de deseos') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('facturas.index')">
+                            {{ __('Facturas') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
