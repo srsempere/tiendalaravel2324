@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishListController;
 use App\Models\Articulo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -67,12 +68,9 @@ Route::get('/comprar', function () {
     ]);
 })->middleware('auth')->name('comprar');
 
-Route::post('wishlist/add/{articulo}', [UserController::class, 'addToWishList'])->name('wishlist.add');
+Route::post('wishlist/add/{articulo}', [WishListController::class, 'addToWishList'])->name('wishlist.add')->middleware('auth');
 
-Route::get('/listaDeseos', function () {
-    if (!Auth::check()) {
-        return redirect()->route('login');
-    }
+Route::get('/listaDeseos', function() {
     $listaDeseos = Auth::user()->listaDeseos()->get();
     return view('listaDeseos', ['listaDeseos' => $listaDeseos]);
 })->name('listaDeseos');
