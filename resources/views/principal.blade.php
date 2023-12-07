@@ -29,7 +29,10 @@
                     <a href="{{ route('carrito.insertar', $articulo) }}"
                         class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-700 hover:bg-blue-800">
                         Añadir al carrito
-
+                    </a>
+                    <br>
+                    <a href="#" class="inline-block text-xs px-4 py-2 border rounded text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800">
+                        Agregar a Lista de deseos
                     </a>
                 </div>
             @endforeach

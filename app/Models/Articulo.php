@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Articulo extends Model
 {
@@ -25,5 +26,10 @@ class Articulo extends Model
     public function getPrecioIiAttribute()
     {
         return $this->precio * (1 + $this->iva->por / 100);
+    }
+
+    public function deseadoPorUsuarios(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }
