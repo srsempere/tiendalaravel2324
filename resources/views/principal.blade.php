@@ -31,9 +31,13 @@
                         Añadir al carrito
                     </a>
                     <br>
-                    <a href="#" class="inline-block text-xs px-4 py-2 border rounded text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800">
-                        Agregar a Lista de deseos
-                    </a>
+                    <form action="{{ route('wishlist.add', $articulo->id) }}" method="post">
+                        @csrf
+                        <button type="submit"
+                            class="inline-block text-xs px-4 py-2 border rounded text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800">
+                            Agregar a Lista de deseos
+                        </button>
+                    </form>
                 </div>
             @endforeach
         </div>
@@ -67,11 +71,11 @@
                                         {{ dinero($linea->getTotalArticulo()) }}
                                     </td>
                                 </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div>
                     <p class="m-2">Total: {{ dinero($carrito->getTotalCarrito()) }}</p>
                     <a href="{{ route('carrito.vaciar') }}"
                         class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Vaciar
