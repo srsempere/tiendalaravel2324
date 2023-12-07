@@ -15,7 +15,10 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        return view('facturas.index');
+        $facturas = $this->getFacturas();
+        return view('facturas.index',[
+            'facturas' => $facturas,
+        ]);
     }
 
     /**
@@ -49,5 +52,16 @@ class FacturaController extends Controller
         session()->flash('exito', 'La factura se ha generado correctamente');
         session()->forget('carrito');
         return redirect()->route('principal');
+    }
+
+    public function getFacturas()
+    {
+        $facturas = Auth::user()->facturas()
+        ->selectRaw('facturas.id, facturas.user_id, facturas.created_at, sum(cantidad * precio) as total')
+        ->join('articulo_factura', 'facturas.id', '=', 'articulo_factura.factura_id')
+        ->join('articulos', 'articulos.id', '=', 'articulo_factura.articulo_id')
+        ->groupBy('facturas.id')
+        ->get();
+        return $facturas;
     }
 }
