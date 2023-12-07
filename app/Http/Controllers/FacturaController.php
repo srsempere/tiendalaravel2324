@@ -32,6 +32,19 @@ class FacturaController extends Controller
         ]);
     }
 
+    public function show($facturaID)
+    {
+        $factura = Factura::find($facturaID);
+
+        if (!$factura) {
+            session()->flash('error', 'No se encuentra la factura indicada');
+            return view('facturas.show');
+        }
+        return view('facturas.show', [
+            'factura' => $factura,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

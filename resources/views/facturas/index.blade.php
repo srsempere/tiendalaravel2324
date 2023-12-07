@@ -17,10 +17,12 @@
             <tbody>
                 @foreach ($facturas as $factura)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $factura->created_at }}
                         </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ dinero($factura->total) }}
                         </th>
 
@@ -32,6 +34,14 @@
                                     Borrar
                                 </x-primary-button>
                             </form> --}}
+                            <a href="{{ route('facturas.show', ['factura' => $factura->id]) }}"
+                                class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-500 hover:bg-blue-800">
+                                Vista previa factura
+                            </a>
+                            <a href="{{ route('facturas.show', $factura) }}"
+                                class="inline-block text-xs px-4 py-2 border rounded text-white bg-green-400 hover:bg-blue-800">
+                                Imprimir factura
+                            </a>
                         </td>
                     </tr>
                 @endforeach
