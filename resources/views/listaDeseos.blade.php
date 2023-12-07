@@ -14,10 +14,16 @@
                         </td>
                         <td class="py-4 px-6">
                             <a href="{{ route('carrito.insertar', $articulo) }}"
-                            class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-700 hover:bg-blue-800">
-                            Añadir al carrito
-                        </a>
-                            Eliminar
+                                class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-700 hover:bg-blue-800">
+                                Añadir al carrito
+                            </a>
+                            <form action="{{ route('wishlist.remove', ['articulo' => $articulo->id]) }}" method="post">
+                                @csrf
+                                <button type="submit"
+                                    class="inline-block text-xs px-4 py-2 border rounded text-white bg-red-400 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-800">
+                                    Eliminar
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

@@ -3,6 +3,7 @@
 namespace App\Generico;
 
 use App\Models\Articulo;
+use Illuminate\Support\Facades\Auth;
 use ValueError;
 
 class Carrito
@@ -22,12 +23,16 @@ class Carrito
             throw new ValueError('El artículo no existe.');
         }
 
+        $user = Auth::user();
+
         if (isset($this->lineas[$id])) {
             $this->lineas[$id]->incrCantidad();
             $this->recalcularTotal();
+            $user->listaDeseos()->detach($id);
         } else {
             $this->lineas[$id] = new Linea($articulo);
             $this->recalcularTotal();
+            $user->listaDeseos()->detach($id);
         }
     }
 

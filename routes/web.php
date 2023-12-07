@@ -69,6 +69,7 @@ Route::get('/comprar', function () {
 })->middleware('auth')->name('comprar');
 
 Route::post('wishlist/add/{articulo}', [WishListController::class, 'addToWishList'])->name('wishlist.add')->middleware('auth');
+Route::post('wishlist/remove/{articulo}', [WishListController::class, 'removeWish'])->name('wishlist.remove')->middleware('auth');
 
 Route::get('/listaDeseos',[WishListController::class, 'show'])->name('listaDeseos')->middleware('auth');
 
