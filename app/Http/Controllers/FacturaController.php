@@ -8,6 +8,8 @@ use App\Models\Iva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Mpdf\Mpdf;
 
 class FacturaController extends Controller
 {
@@ -105,5 +107,69 @@ class FacturaController extends Controller
             ->groupBy('facturas.id')
             ->get();
         return $facturas;
+    }
+
+    public function imprimir($facturaID)
+    {
+        Log::info("Iniciando la generación de PDF para la factura: $facturaID");
+        $factura = Factura::with('articulos', 'articulos.iva')->find($facturaID);
+        Log::info("Factura cargada desde la base de datos");
+
+        if (!$factura) {
+            Log::info("La factura $facturaID no se encontró");
+            session()->flash('error', 'No se encuentra la factura indicada');
+            return view('facturas.show');
+        }
+
+        $total = 0;
+        $base4 = 0;
+        $base10 = 0;
+        $base21 = 0;
+        $por = 0;
+
+        foreach ($factura->articulos as $articulo) {
+            $total += $articulo->pivot->cantidad * $articulo->precio;
+
+            $ivaPorcentaje = $articulo->iva->por;
+            switch ($ivaPorcentaje) {
+                case '21':
+                    $base21 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+                case '10':
+                    $base10 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+                case '4':
+                    $base4 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+            }
+        }
+        Log::info("Cálculos realizados para la factura");
+
+        $html = view('facturas.show', [
+            'factura' => $factura,
+            'total' => $total,
+            'base4' => $base4,
+            'base10' => $base10,
+            'base21' => $base21,
+            'cuota4' => $base4 * 0.04,
+            'cuota10' => $base10 * 0.1,
+            'cuota21' => $base21 * 0.21,
+        ])->render();
+        Log::info("Vista renderizada a HTML");
+
+        try {
+            $mpdf = new Mpdf();
+            Log::info("Instancia de Mpdf creada");
+
+            Log::info("Escribiendo HTML en Mpdf");
+            $mpdf->WriteHTML($html);
+            Log::info("HTML escrito en Mpdf");
+
+            Log::info("Generando salida de PDF");
+            $mpdf->Output("Factura-{$factura->id}.pdf", 'I');
+            Log::info("PDF generado y enviado al navegador");
+        } catch (\Exception $e) {
+            Log::error("Error al generar el PDF: " . $e->getMessage());
+        }
     }
 }

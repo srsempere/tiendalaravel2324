@@ -75,5 +75,6 @@ Route::get('/comprar', [FacturaController::class, 'create'])->middleware('auth')
 
 Route::post('/realizar_compra', [FacturaController::class, 'realizarCompra'])->middleware('auth')->name('realizar_compra');
 
-// Route::post('/realizar_compra', [FacturaController::class, ])
+Route::get('/facturas/{factura}/pdf', [FacturaController::class, 'imprimir'])->name('facturas.imprimir');
+
 require __DIR__ . '/auth.php';

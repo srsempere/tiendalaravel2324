@@ -27,13 +27,6 @@
                         </th>
 
                         <td class="px-6 py-4">
-                            {{-- <form action="{{ route('articulos.destroy', ['articulo' => $articulo]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-primary-button class="bg-red-500">
-                                    Borrar
-                                </x-primary-button>
-                            </form> --}}
                             <a href="{{ route('facturas.show', ['factura' => $factura->id]) }}"
                                 class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-500 hover:bg-blue-800">
                                 Vista previa factura

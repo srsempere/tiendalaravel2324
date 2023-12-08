@@ -1,5 +1,4 @@
-<x-app-layout>
-    <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+    <div class="max-w-4xl mx-auto p-8 m-8 bg-white shadow-lg rounded-lg">
         <h1 class="text-2xl font-bold">Factura nº {{ $factura->id }}</h1>
         <h2 class="text-xl mb-4">Fecha: {{ $factura->created_at }}</h2>
         <table class="min-w-full table-auto">
@@ -25,6 +24,8 @@
             </tbody>
         </table>
         <div class="mt-4">
+            Subtotal: {{ dinero($total) }}
+            <br>
             Base Imponible 4%: {{ dinero($base4) }} Cuota: {{ dinero($cuota4 = $base4 * 0.04) }}
             <br>
             Base Imponible 10%: {{ dinero($base10) }} Cuota: {{ dinero($cuota10 = $base10 * 0.1) }}
@@ -35,5 +36,9 @@
         <div class="mt-4 font-bold text-xl">
             <strong>TOTAL FACTURA: {{ dinero($total + $cuota4 + $cuota10 + $cuota21) }}</strong>
         </div>
+
+        <a href="{{ route('facturas.imprimir', $factura->id) }}"
+            class="inline-block mt-2 text-xs px-4 py-2 border rounded text-white font-bold bg-gray-400 hover:bg-gray-600">
+            Imprimir factura
+        </a>
     </div>
-</x-app-layout>
