@@ -31,7 +31,7 @@
                                 class="inline-block text-xs px-4 py-2 border rounded text-white bg-blue-500 hover:bg-blue-800">
                                 Vista previa factura
                             </a>
-                            <a href="{{ route('facturas.show', $factura) }}"
+                            <a href="{{ route('facturas.imprimir', $factura->id) }}"
                                 class="inline-block text-xs px-4 py-2 border rounded text-white bg-green-400 hover:bg-blue-800">
                                 Imprimir factura
                             </a>
