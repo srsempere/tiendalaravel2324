@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use App\Generico\Carrito;
+use App\Models\Iva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,7 @@ class FacturaController extends Controller
     public function index()
     {
         $facturas = $this->getFacturas();
-        return view('facturas.index',[
+        return view('facturas.index', [
             'facturas' => $facturas,
         ]);
     }
@@ -34,9 +35,8 @@ class FacturaController extends Controller
 
     public function show($facturaID)
     {
-        // $factura = Factura::find($facturaID);
-        $factura = Factura::with('articulos')->find($facturaID);
 
+        $factura = Factura::with('articulos', 'articulos.iva')->find($facturaID);
 
         if (!$factura) {
             session()->flash('error', 'No se encuentra la factura indicada');
@@ -44,12 +44,33 @@ class FacturaController extends Controller
         }
 
         $total = 0;
+        $base4 = 0;
+        $base10 = 0;
+        $base21 = 0;
+        $por = 0;
+
         foreach ($factura->articulos as $articulo) {
             $total += $articulo->pivot->cantidad * $articulo->precio;
+
+            $ivaPorcentaje = $articulo->iva->por;
+            switch ($ivaPorcentaje) {
+                case '21':
+                    $base21 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+                case '10':
+                    $base10 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+                case '4':
+                    $base4 += $articulo->pivot->cantidad * $articulo->precio;
+                    break;
+            }
         }
         return view('facturas.show', [
             'factura' => $factura,
             'total' => $total,
+            'base4' => $base4,
+            'base10' => $base10,
+            'base21' => $base21,
         ]);
     }
 
@@ -78,11 +99,11 @@ class FacturaController extends Controller
     public function getFacturas()
     {
         $facturas = Auth::user()->facturas()
-        ->selectRaw('facturas.id, facturas.user_id, facturas.created_at, sum(cantidad * precio) as total')
-        ->join('articulo_factura', 'facturas.id', '=', 'articulo_factura.factura_id')
-        ->join('articulos', 'articulos.id', '=', 'articulo_factura.articulo_id')
-        ->groupBy('facturas.id')
-        ->get();
+            ->selectRaw('facturas.id, facturas.user_id, facturas.created_at, sum(cantidad * precio) as total')
+            ->join('articulo_factura', 'facturas.id', '=', 'articulo_factura.factura_id')
+            ->join('articulos', 'articulos.id', '=', 'articulo_factura.articulo_id')
+            ->groupBy('facturas.id')
+            ->get();
         return $facturas;
     }
 }
