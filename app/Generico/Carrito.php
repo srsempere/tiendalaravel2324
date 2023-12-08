@@ -23,15 +23,22 @@ class Carrito
             throw new ValueError('El artículo no existe.');
         }
 
+
         // Control de stock
         if ($articulo->stock < 1) {
             session()->flash('error', 'Actualmente no existe stock disponible para añadir al carrito.');
             return redirect()->route('principal');
         }
 
+
         $user = Auth::user();
 
         if (isset($this->lineas[$id])) {
+
+            if ($this->lineas[$id]->getCantidad() == $articulo->stock) {
+                session()->flash('error', 'Actualmente no existe stock disponible para añadir al carrito.');
+                return redirect()->route('principal');
+            }
             $this->lineas[$id]->incrCantidad();
             $this->recalcularTotal();
             $user->listaDeseos()->detach($id);

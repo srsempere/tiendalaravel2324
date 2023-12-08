@@ -38,6 +38,7 @@
                             Agregar a Lista de deseos
                         </button>
                     </form>
+                    Stock: {{ $articulo->stock }}
                 </div>
             @endforeach
         </div>
