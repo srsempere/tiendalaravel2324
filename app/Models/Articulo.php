@@ -11,7 +11,7 @@ class Articulo extends Model
 {
     use HasFactory;
 
-    protected $fillable =['denominacion', 'precio', 'categoria_id', 'iva_id', 'descripcion'];
+    protected $fillable =['denominacion', 'precio', 'categoria_id', 'iva_id', 'descripcion', 'stock'];
 
     public function categoria(): BelongsTo
     {
