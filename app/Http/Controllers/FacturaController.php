@@ -34,14 +34,22 @@ class FacturaController extends Controller
 
     public function show($facturaID)
     {
-        $factura = Factura::find($facturaID);
+        // $factura = Factura::find($facturaID);
+        $factura = Factura::with('articulos')->find($facturaID);
+
 
         if (!$factura) {
             session()->flash('error', 'No se encuentra la factura indicada');
             return view('facturas.show');
         }
+
+        $total = 0;
+        foreach ($factura->articulos as $articulo) {
+            $total += $articulo->pivot->cantidad * $articulo->precio;
+        }
         return view('facturas.show', [
             'factura' => $factura,
+            'total' => $total,
         ]);
     }
 
