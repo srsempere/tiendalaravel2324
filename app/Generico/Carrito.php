@@ -23,6 +23,7 @@ class Carrito
             throw new ValueError('El artículo no existe.');
         }
 
+        $user = Auth::user();
 
         // Control de stock
         if ($articulo->stock < 1) {
@@ -31,21 +32,23 @@ class Carrito
         }
 
 
-        $user = Auth::user();
 
         if (isset($this->lineas[$id])) {
-
             if ($this->lineas[$id]->getCantidad() == $articulo->stock) {
                 session()->flash('error', 'Actualmente no existe stock disponible para añadir al carrito.');
                 return redirect()->route('principal');
             }
             $this->lineas[$id]->incrCantidad();
             $this->recalcularTotal();
-            $user->listaDeseos()->detach($id);
+            if (isset($user)) {
+                $user->listaDeseos()->detach($id);
+            }
         } else {
             $this->lineas[$id] = new Linea($articulo);
             $this->recalcularTotal();
-            $user->listaDeseos()->detach($id);
+            if (isset($user)) {
+                $user->listaDeseos()->detach($id);
+            }
         }
     }
 
