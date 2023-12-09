@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use App\Generico\Carrito;
+use App\Models\Articulo;
 use App\Models\Iva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,6 +93,14 @@ class FacturaController extends Controller
             $attachs[$articulo_id] = ['cantidad' => $linea->getCantidad()];
         }
         $factura->articulos()->attach($attachs);
+
+        foreach ($carrito->getLineas() as $linea) {
+            $articulo = Articulo::find($linea->getArticulo()->id);
+            if ($articulo) {
+                $articulo->stock -= $linea->getCantidad();
+                $articulo->save();
+            }
+        }
         DB::commit();
         session()->flash('exito', 'La factura se ha generado correctamente');
         session()->forget('carrito');
