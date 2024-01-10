@@ -37,7 +37,9 @@ class CategoriaPolicy
      */
     public function update(User $user, Categoria $categoria): bool
     {
-        return true;
+        return $user->rol->nombre == 'admin'
+                ? Response::allow()
+                : Response::deny('No tienes permisos para modificar la categoría');
     }
 
     /**
