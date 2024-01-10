@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->authorizeResource(Categoria::class, 'categoria');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -34,7 +41,7 @@ class CategoriaController extends Controller
 
         $validated = $this->valida($request);
         if ($validated) {
-            session()->flash('exito','La categoría se ha creado correctamente');
+            session()->flash('exito', 'La categoría se ha creado correctamente');
         }
         Categoria::create($validated);
         return redirect()->route('categorias.index');
