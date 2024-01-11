@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Categoria;
+use App\Models\Articulo;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CategoriaPolicy
+class ArticuloPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class CategoriaPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Categoria $categoria): bool
+    public function view(User $user, Articulo $articulo): bool
     {
         return true;
     }
@@ -35,7 +35,7 @@ class CategoriaPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Categoria $categoria): bool
+    public function update(User $user, Articulo $articulo): bool
     {
         return $user->rol->nombre == 'admin';
     }
@@ -43,7 +43,7 @@ class CategoriaPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Categoria $categoria): bool
+    public function delete(User $user, Articulo $articulo): bool
     {
         return $user->rol->nombre == 'admin';
     }
@@ -51,7 +51,7 @@ class CategoriaPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Categoria $categoria): bool
+    public function restore(User $user, Articulo $articulo): bool
     {
         return $user->rol->nombre == 'admin';
     }
@@ -59,7 +59,7 @@ class CategoriaPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Categoria $categoria): bool
+    public function forceDelete(User $user, Articulo $articulo): bool
     {
         return $user->rol->nombre == 'admin';
     }

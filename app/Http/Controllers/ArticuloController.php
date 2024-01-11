@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Articulo::class, 'articulo');
+    }
+
     /**
      * Display a listing of the resource.
      */
